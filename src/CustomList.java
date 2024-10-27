@@ -26,6 +26,7 @@ public class CustomList implements IntegerList {
     if (item == null) {
       throw new IllegalArgumentException("Элемент не может быть null.");
     }
+    grow();
     ensureCapacity();
     items[size++] = item;
     return item;
@@ -36,9 +37,7 @@ public class CustomList implements IntegerList {
     if (item == null) {
       throw new IllegalArgumentException("Элемент не может быть null.");
     }
-    if (index < 0 || index > size) {
-      throw new IndexOutOfBoundsException("Индекс выходит за пределы.");
-    }
+    grow();
     ensureCapacity();
     System.arraycopy(items, index, items, index + 1, size - index);
     items[index] = item;
@@ -90,7 +89,7 @@ public class CustomList implements IntegerList {
 
     Integer[] storageCopy = toArray();
     Arrays.sort(storageCopy);
-    return binarySearch(storageCopy, item) ;
+    return binarySearch(storageCopy, item);
   }
 
 
@@ -172,18 +171,42 @@ public class CustomList implements IntegerList {
         '}';
   }
 
-  private void sort(Integer[] storageCopy) {
-    for (int i = 1; i < items.length; i++) {
-      int temp = items[i];
-      int j = i;
-      while (j > 0 && items[j - 1] >= temp) {
-        items[j] = items[j - 1];
-        j--;
-      }
-      items[j] = temp;
-    }
+  private void sort(Integer[] arr) {
+    quickSort(arr, 0, arr.length - 1);
 
   }
+
+  private void quickSort(Integer[] arr, int begin, int end) {
+    if (begin < end) {
+      int partitionIndex = partition(arr, begin, end);
+
+      quickSort(arr, begin, partitionIndex - 1);
+      quickSort(arr, partitionIndex + 1, end);
+    }
+  }
+
+  private int partition(Integer[] arr, int begin, int end) {
+    int pivot = arr[end];
+    int i = (begin - 1);
+
+    for (int j = begin; j < end; j++) {
+      if (arr[j] <= pivot) {
+        i++;
+
+        swapElements(arr, i, j);
+      }
+    }
+
+    swapElements(arr, i + 1, end);
+    return i + 1;
+  }
+
+  private void swapElements(Integer[] arr, int i1, int j1) {
+    int temp = arr[i1];
+    arr[i1] = arr[j1];
+    arr[j1] = temp;
+  }
+
 
   private boolean binarySearch(Integer[] arr, Integer items) {
     int min = 0;
@@ -203,6 +226,11 @@ public class CustomList implements IntegerList {
       }
     }
     return false;
+  }
+
+  private void grow() {
+    int newSize = (int) (items.length * 1.5);
+    items = Arrays.copyOf(items, newSize);
   }
 
 }

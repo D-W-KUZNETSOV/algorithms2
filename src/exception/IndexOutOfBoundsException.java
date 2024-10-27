@@ -1,6 +1,6 @@
 package exception;
 
-public class IndexOutOfBoundsException extends RuntimeException{
+public class IndexOutOfBoundsException extends RuntimeException {
 
 
   public IndexOutOfBoundsException() {

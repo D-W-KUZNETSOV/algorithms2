@@ -1,6 +1,6 @@
 package exception;
 
-public class IllegalArgumentException extends RuntimeException{
+public class IllegalArgumentException extends RuntimeException {
 
 
   public IllegalArgumentException() {

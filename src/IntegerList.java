@@ -2,20 +2,19 @@
 public interface IntegerList {
 
 
- Integer add(Integer item);
+  Integer add(Integer item);
 
 
- Integer add(int index,Integer item);
+  Integer add(int index, Integer item);
 
 
-
- Integer set(int index,Integer item);
-
-
- Integer remove(Integer item);
+  Integer set(int index, Integer item);
 
 
- Integer remove(int index);
+  Integer remove(Integer item);
+
+
+  Integer remove(int index);
 
 
   boolean contains(Integer item);
@@ -26,7 +25,7 @@ public interface IntegerList {
   int lastIndexOf(Integer item);
 
 
- Integer get(int index);
+  Integer get(int index);
 
 
   boolean equals(IntegerList otherList);
@@ -40,5 +39,5 @@ public interface IntegerList {
   void clear();
 
 
- Integer[] toArray();
+  Integer[] toArray();
 }

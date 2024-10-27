@@ -78,7 +78,7 @@ public class CustomList implements IntegerList {
     if (numMoved > 0) {
       System.arraycopy(items, index + 1, items, index, numMoved);
     }
-    items[--size] = null; // Удаление ссылки для сборщика мусора
+
     return removeditem;
   }
 
@@ -88,9 +88,9 @@ public class CustomList implements IntegerList {
       throw new IllegalArgumentException("Item cannot be null");
     }
 
-    Integer[] storageCopy = toArray(); // Получаем копию массива
-    Arrays.sort(storageCopy); // Сортируем копию массива
-    return binarySearch(storageCopy, item) ; // Проверяем, найден ли элемент
+    Integer[] storageCopy = toArray();
+    Arrays.sort(storageCopy);
+    return binarySearch(storageCopy, item) ;
   }
 
 
@@ -204,7 +204,6 @@ public class CustomList implements IntegerList {
     }
     return false;
   }
-
 
 }
 
